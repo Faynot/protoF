@@ -3,17 +3,17 @@ use std::fs::File;
 use std::io::{self, Write};
 
 fn main() {
-    const bash: [&str; 7] = [
+    const BASH: [&str; 7] = [
         "shutdown",
-        "timer",
-        "open",
-        "close",
-        "create",
-        "delete",
-        "test"
+        "echo",
+        "open", // not implemented
+        "close", // not implemented
+        "create", // not implemented
+        "delete", // not implemented
+        "test" // not implemented
     ];
 
-    let mut protos: Vec<serde_json::Value> = Vec::new();
+    let mut commands: Vec<String> = Vec::new();
     let args: Vec<String> = env::args().collect();
 
     if args.len() < 2 {
@@ -23,9 +23,9 @@ fn main() {
 
     let command = &args[1];
     match command.as_str() {
-        "debug" => debug(&mut protos),
+        "debug" => debug(&commands),
         "help" => help(),
-        "new" => new(&args[2..], &mut protos),
+        "new" => new(&args[2..], &mut commands, &BASH),
         _ => {
             println!("Unknown command: {}", command);
             println!("Available commands: command1, command2");
@@ -33,42 +33,65 @@ fn main() {
     }
 }
 
-fn debug(protos: &mut Vec<serde_json::Value>) {
-    println!("{:?}", protos);
+fn debug(commands: &Vec<String>) {
+    println!("{:?}", commands);
 }
 
-fn new(args: &[String], protos: &mut Vec<serde_json::Value>) {
+fn new(args: &[String], commands: &mut Vec<String>, bash: &[&str; 7]) {
     if args.len() != 1 {
         println!("Please enter this command as - protof new <name>");
     } else if !args[0].is_empty() && !args[0].chars().all(|c| c.is_whitespace()) {
         println!("Creating a new protocol with name: {}", args[0]);
-        protos.push(serde_json::Value::String(args[0].clone()));
-
-        let file_name = format!("{}.json", args[0]);
-        let mut file = match File::create(&file_name) {
+        let mut file = match File::create(format!("{}.sh", args[0])) {
             Ok(file) => file,
             Err(err) => {
-                eprintln!("Error creating file {}: {}", file_name, err);
+                eprintln!("Error creating file {}.sh: {}", args[0], err);
                 return;
             }
         };
-
-        println!("Enter commands (type 'quit()' to exit):");
+        let comms: &str = r#"
+              List of arg - PROTOF
+        0                =                Turn off computer
+        1                =                Write something
+        2                =                Open some program
+        3                =                Close some program
+        4                =                Create some file
+        5                =                Delete some file
+        6                =                idk
+        "#;
+        println!("{}", comms);
+        println!("Enter command numbers (type 'quit()' to exit):");
 
         loop {
-            let mut command = String::new();
-            io::stdin().read_line(&mut command).expect("Failed to read line");
+            let mut input = String::new();
 
-            if command.trim() == "quit()" {
+            io::stdin().read_line(&mut input).expect("Failed to read line");
+
+            if input.trim() == "quit()" {
                 break;
             }
 
-            if let Err(err) = writeln!(file, "{}", command.trim()) {
-                eprintln!("Error writing to file {}: {}", file_name, err);
-                return;
+            if let Ok(index) = input.trim().parse::<usize>() {
+                if index < bash.len() {
+                    let command = bash[index];
+                    if command == "echo" {
+                        println!("Enter arg to {}: ", index);
+                        let mut arg = String::new();
+                        io::stdin().read_line(&mut arg).expect("Failed to read line");
+                        writeln!(file, "{} \"{}\"", command, arg.trim()).expect("Error writing to file");
+                        commands.push(format!("{} \"{}\"", command, arg.trim()));
+                    } else {
+                        writeln!(file, "{}", command).expect("Error writing to file");
+                        commands.push(command.to_string());
+                    }
+                } else {
+                    println!("Invalid command number: {}", index);
+                }
+            } else {
+                println!("Invalid input, please enter a number");
             }
         }
-        println!("Commands saved in file: {}", file_name);
+        println!("Commands saved in file: {}.sh", args[0]);
     } else {
         println!("Protocol name cannot be empty");
     }
@@ -86,6 +109,7 @@ password <name> <proto>   =             create/change password
 "#;
     println!("{}", help);
 }
+
 
 //      Добавление элементов разных типов в вектор
 // my_vector.push(serde_json::Value::String("Hello".to_string()));
