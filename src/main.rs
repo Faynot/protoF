@@ -10,7 +10,7 @@ fn main() {
         "close", // not implemented
         "create", // not implemented
         "delete", // not implemented
-        "test" // not implemented
+        "test" // idk lmao lol lul kek eshkere
     ];
 
     let mut commands: Vec<String> = Vec::new();
