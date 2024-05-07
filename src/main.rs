@@ -1,19 +1,22 @@
+mod search;
+
 use std::env;
-use std::fs::File;
+use std::fs::{self, File};
 use std::io::{self, Write};
 
 fn main() {
-    const bash: [&str; 7] = [
+    const BASH: [&str; 8] = [
         "shutdown",
-        "timer",
-        "open",
-        "close",
-        "create",
-        "delete",
-        "test"
+        "echo",
+        "mkdir",
+        "rmdir",
+        "New-Item",
+        "rm",
+        "start",
+        "taskkill"
     ];
 
-    let mut protos: Vec<serde_json::Value> = Vec::new();
+    let mut commands: Vec<String> = Vec::new();
     let args: Vec<String> = env::args().collect();
 
     if args.len() < 2 {
@@ -23,9 +26,24 @@ fn main() {
 
     let command = &args[1];
     match command.as_str() {
-        "debug" => debug(&mut protos),
+        "list" => list_files(),
+        "start" => {
+            if args.len() < 3 {
+                println!("Usage: {} start <protocol_name>", args[0]);
+            } else {
+                start_protocol(&args[2]);
+            }
+        }
+        "delete" => {
+            if args.len() < 3 {
+                println!("Usage: {} delete <protocol_name>", args[0]);
+            } else {
+                delete_protocol(&args[2]);
+            }
+        }
+        "debug" => debug(&commands),
         "help" => help(),
-        "new" => new(&args[2..], &mut protos),
+        "new" => new(&args[2..], &mut commands, &BASH),
         _ => {
             println!("Unknown command: {}", command);
             println!("Available commands: command1, command2");
@@ -33,67 +51,259 @@ fn main() {
     }
 }
 
-fn debug(protos: &mut Vec<serde_json::Value>) {
-    println!("{:?}", protos);
-}
-
-fn new(args: &[String], protos: &mut Vec<serde_json::Value>) {
-    if args.len() != 1 {
-        println!("Please enter this command as - protof new <name>");
-    } else if !args[0].is_empty() && !args[0].chars().all(|c| c.is_whitespace()) {
-        println!("Creating a new protocol with name: {}", args[0]);
-        protos.push(serde_json::Value::String(args[0].clone()));
-
-        let file_name = format!("{}.json", args[0]);
-        let mut file = match File::create(&file_name) {
-            Ok(file) => file,
-            Err(err) => {
-                eprintln!("Error creating file {}: {}", file_name, err);
-                return;
-            }
-        };
-
-        println!("Enter commands (type 'quit()' to exit):");
-
-        loop {
-            let mut command = String::new();
-            io::stdin().read_line(&mut command).expect("Failed to read line");
-
-            if command.trim() == "quit()" {
-                break;
-            }
-
-            if let Err(err) = writeln!(file, "{}", command.trim()) {
-                eprintln!("Error writing to file {}: {}", file_name, err);
-                return;
-            }
+fn delete_protocol(protocol_name: &str) {
+    let appdata_dir = match dirs::data_local_dir() {
+        Some(path) => path.join("protof"),
+        None => {
+            eprintln!("Failed to get AppData directory");
+            return;
         }
-        println!("Commands saved in file: {}", file_name);
+    };
+
+    let script_name = format!("{}.sh", protocol_name);
+    let script_path = appdata_dir.join(&script_name);
+
+    if script_path.exists() {
+        match fs::remove_file(&script_path) {
+            Ok(()) => println!("Protocol '{}' successfully deleted.", protocol_name),
+            Err(err) => eprintln!("Error deleting protocol '{}': {}", protocol_name, err),
+        }
     } else {
-        println!("Protocol name cannot be empty");
+        println!("Protocol '{}' not found.", protocol_name);
+    }
+}
+fn start_protocol(protocol_name: &str) {
+    let appdata_dir = match dirs::data_local_dir() {
+        Some(path) => path.join("protof"),
+        None => {
+            eprintln!("Failed to get AppData directory");
+            return;
+        }
+    };
+
+    if !appdata_dir.exists() {
+        println!("No protocols found.");
+        return;
+    }
+
+    let script_name = format!("{}.sh", protocol_name);
+    let script_path = appdata_dir.join(&script_name);
+
+    if script_path.exists() {
+        println!("Starting protocol: {}", protocol_name);
+        // Используем powershell для запуска .sh файла
+        if let Err(err) = std::process::Command::new("powershell")
+            .arg("-Command")
+            .arg(&format!("& '{}'", script_path.to_string_lossy()))
+            .status()
+        {
+            eprintln!("Failed to start protocol: {}", err);
+        }
+    } else {
+        println!("Protocol '{}' not found.", protocol_name);
     }
 }
 
-fn help() {
-    let help: &str = r#"
-              List of commands - PROTOF
-help                      =             list of commands
-new <name>                =             create a new protocol
-remove <name>             =             remove a protocol
-list                      =             list of protocols
-password <name> <proto>   =             create/change password
-                                        of protocol
-"#;
-    println!("{}", help);
+
+fn debug(commands: &Vec<String>) {
+    println!("{:?}", commands);
 }
 
-//      Добавление элементов разных типов в вектор
-// my_vector.push(serde_json::Value::String("Hello".to_string()));
-// my_vector.push(serde_json::Value::Number(serde_json::Number::from(42)));
-// my_vector.push(serde_json::Value::Bool(true));
+fn new(args: &[String], commands: &mut Vec<String>, bash: &[&str; 8]) {
+    if args.len() != 1 {
+        eprintln!("Please enter this command as - protof new <name>");
+        return;
+    }
 
-// "example" => example(&args[2..]),
+    let protocol_name = args[0].trim();
+    if protocol_name.is_empty() || protocol_name.chars().all(|c| c.is_whitespace()) {
+        println!("Protocol name cannot be empty");
+        return;
+    }
 
-// fn example(args: &[String]) {
-//      println!("Command 1 executed with args: {:?}", args);
-// }
+    let appdata_dir = match dirs::data_local_dir() {
+        Some(path) => path.join("protof"),
+        None => {
+            eprintln!("Failed to get AppData directory");
+            return;
+        }
+    };
+
+    if !appdata_dir.exists() {
+        if let Err(err) = fs::create_dir(&appdata_dir) {
+            eprintln!("Error creating directory: {}", err);
+            return;
+        }
+    }
+
+    let file_path = appdata_dir.join(format!("{}.sh", protocol_name));
+
+    let mut file = match File::create(&file_path) {
+        Ok(file) => file,
+        Err(err) => {
+            eprintln!("Error creating file {}: {}", file_path.display(), err);
+            return;
+        }
+    };
+
+    let comms: &str = r#"
+        List of arguments - PROTOF
+        ╔═════════════════════════════════════════════════════════════╗
+        ╠ 0                =                Turn off computer         ╣
+        ╠ 1                =                Write something           ╣
+        ╠ 2                =                Create directory          ╣
+        ╠ 3                =                Delete directory          ╣
+        ╠ 4                =                Create some file          ╣
+        ║                                   arg to 4 = <path>         ║
+        ║                                                             ║
+        ╠ 5                =                Delete some file          ╣
+        ║                                   arg to 5 = <path>         ║
+        ║                                                             ║
+        ╠ 6                =                Open some programm        ╣
+        ║                                   arg to 6 = <name > <path> ║
+        ║                                                             ║
+        ╠ 7                =                Close some program        ╣
+        ║                                   arg to 7 = <name>.exe     ║
+        ╚═════════════════════════════════════════════════════════════╝
+    "#;
+
+    println!("{}", comms);
+    println!("Enter command numbers (type 'quit()' to exit):");
+
+    loop {
+        let mut input = String::new();
+        io::stdin().read_line(&mut input).expect("Failed to read line");
+
+        if input.trim() == "quit()" {
+            break;
+        }
+
+        if let Ok(index) = input.trim().parse::<usize>() {
+            if let Some(&command) = bash.get(index) {
+                match command {
+                    "start" => {
+                        println!("Enter <name>, the name must match the exe file: ");
+                        let mut name = String::new();
+                        io::stdin().read_line(&mut name).expect("Failed to read line");
+
+                        println!("Enter path (type 'skip' to search): ");
+                        let mut path = String::new();
+                        io::stdin().read_line(&mut path).expect("Failed to read line");
+
+                        let command_line = if path.trim() == "skip" {
+                            if let Ok(Some(found_path)) = search::find_exe(name.trim()) {
+                                format!("start \"{}\" \"{}\"", name.trim(), found_path)
+                            } else {
+                                println!("Program not found");
+                                continue;
+                            }
+                        } else {
+                            format!("start \"{}\" \"{}\"", name.trim(), path.trim())
+                        };
+
+                        writeln!(file, "{}", command_line).expect("Error writing to file");
+                        commands.push(command_line);
+                    }
+                    "echo" | "mkdir" | "rmdir" => {
+                        println!("Enter a value:");
+                        let mut value = String::new();
+                        io::stdin().read_line(&mut value).expect("Failed to read line");
+
+                        let command_line = format!("{} {}", command, value.trim());
+                        writeln!(file, "{}", command_line).expect("Error writing to file");
+                        commands.push(command_line);
+                    }
+                    "taskkill" => {
+                        println!("Enter the name of the program you are going to close:");
+                        let mut program_name = String::new();
+                        io::stdin().read_line(&mut program_name).expect("Failed to read line");
+
+                        let command_line = format!("taskkill /IM {}.exe /F", program_name.trim());
+                        writeln!(file, "{}", command_line).expect("Error writing to file");
+                        commands.push(command_line);
+                    }
+                    "rm" => {
+                        println!("Enter the name and extension of file to delete:");
+                        let mut rm_name = String::new();
+                        io::stdin().read_line(&mut rm_name).expect("Failed to read line");
+
+                        let command_line = format!("rm {}", rm_name.trim());
+                        writeln!(file, "{}", command_line).expect("Error writing to file");
+                        commands.push(command_line);
+                    }
+                    "New-Item" => {
+                        println!("Enter the name and extension of new file:");
+                        let mut newitem_name = String::new();
+                        io::stdin().read_line(&mut newitem_name).expect("Failed to read line");
+
+                        let command_line = format!("New-Item {} -ItemType file", newitem_name.trim());
+                        writeln!(file, "{}", command_line).expect("Error writing to file");
+                        commands.push(command_line);
+                    }
+                    "shutdown" => {
+                        writeln!(file, "shutdown").expect("Error writing to file");
+                        commands.push("shutdown".to_string());
+                    }
+                    _ => {
+                        println!("Invalid command: {}", command);
+                    }
+                }
+            } else {
+                println!("Invalid command number: {}", index);
+            }
+        } else {
+            println!("Invalid input, please enter a number");
+        }
+    }
+
+    println!("Commands saved in file: {}", file_path.display());
+}
+
+fn help() {
+    const HELP: &str = r#"
+    ╔══════════════════════════════════════════════════════════════════╗
+    ║                    List of commands - PROTOF                     ║
+    ║   help                      =             list of commands       ║
+    ║   new <name>                =             create a new protocol  ║
+    ║   delete <name>             =             remove a protocol      ║
+    ║   list                      =             list of protocols      ║
+    ║   password <name> <proto>   =             create/change password ║
+    ║                                           of protocol            ║
+    ╚══════════════════════════════════════════════════════════════════╝
+"#;
+    println!("{}", HELP);
+}
+
+fn list_files() {
+    let appdata_dir = match dirs::data_local_dir() {
+        Some(path) => path.join("protof"),
+        None => {
+            eprintln!("Failed to get AppData directory");
+            return;
+        }
+    };
+
+    if !appdata_dir.exists() {
+        println!("No protocols found.");
+        return;
+    }
+
+    println!("List of protocols:");
+    let sh_files = fs::read_dir(&appdata_dir)
+        .map(|entries| entries.filter_map(|entry| entry.ok()))
+        .map(|entries| entries.filter(|entry| entry.path().extension().map(|ext| ext == "sh").unwrap_or(false)))
+        .map(|filtered_entries| filtered_entries.map(|entry| entry.file_name().into_string().unwrap()).collect::<Vec<String>>());
+
+    match sh_files {
+        Ok(files) if files.is_empty() => println!("No .sh files found in 'protof' directory."),
+        Ok(files) => {
+            let max_len = files.iter().map(|file| file.len()).max().unwrap_or(0);
+            println!("╔{}╗", "═".repeat(max_len + 2));
+            for file in &files {
+                println!("║ {:<width$} ║", file, width = max_len);
+            }
+            println!("╚{}╝", "═".repeat(max_len + 2));
+        }
+        Err(err) => eprintln!("Error checking 'protof' directory: {}", err),
+    }
+}

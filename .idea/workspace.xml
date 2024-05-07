@@ -7,11 +7,78 @@
     <cargoProject FILE="$PROJECT_DIR$/Cargo.toml" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d05ee489-7908-4537-b99b-5e0374ededb5" name="Changes" comment="" />
+    <list default="true" id="d05ee489-7908-4537-b99b-5e0374ededb5" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/search.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/name.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/.fingerprint/protof-de879e1ecfa22a84/bin-protof" beforeDir="false" afterPath="$PROJECT_DIR$/target/debug/.fingerprint/protof-de879e1ecfa22a84/bin-protof" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/.fingerprint/protof-de879e1ecfa22a84/bin-protof.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/debug/.fingerprint/protof-de879e1ecfa22a84/bin-protof.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/.fingerprint/protof-de879e1ecfa22a84/dep-bin-protof" beforeDir="false" afterPath="$PROJECT_DIR$/target/debug/.fingerprint/protof-de879e1ecfa22a84/dep-bin-protof" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/.fingerprint/protof-de879e1ecfa22a84/output-bin-protof" beforeDir="false" afterPath="$PROJECT_DIR$/target/debug/.fingerprint/protof-de879e1ecfa22a84/output-bin-protof" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/deps/protof.d" beforeDir="false" afterPath="$PROJECT_DIR$/target/debug/deps/protof.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/deps/protof.exe" beforeDir="false" afterPath="$PROJECT_DIR$/target/debug/deps/protof.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/deps/protof.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/target/debug/deps/protof.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8-8x2ek8rdf5ylnanlioazhj7u1/10slemtj53k0t5d7.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8-8x2ek8rdf5ylnanlioazhj7u1/1677tbgc3wnhd3th.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8-8x2ek8rdf5ylnanlioazhj7u1/182esqufj7d7qels.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8-8x2ek8rdf5ylnanlioazhj7u1/1htb9f97geqchuv9.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8-8x2ek8rdf5ylnanlioazhj7u1/1llyc2njlrs5lefk.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8-8x2ek8rdf5ylnanlioazhj7u1/1oy67nsu2ch3uh4f.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8-8x2ek8rdf5ylnanlioazhj7u1/1qvm9sqg1gv2z8h.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8-8x2ek8rdf5ylnanlioazhj7u1/1qxo0jfubjq9cmqu.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8-8x2ek8rdf5ylnanlioazhj7u1/1rskiuees1rb1xtt.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8-8x2ek8rdf5ylnanlioazhj7u1/1sbvo32mdid9cq6n.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8-8x2ek8rdf5ylnanlioazhj7u1/25bbdwzg4byetv6q.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8-8x2ek8rdf5ylnanlioazhj7u1/266r32j80c2k9gzd.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8-8x2ek8rdf5ylnanlioazhj7u1/2gq3ic4j5ez7d44e.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8-8x2ek8rdf5ylnanlioazhj7u1/2sk42etw3xeju3r9.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8-8x2ek8rdf5ylnanlioazhj7u1/2uulqckgrl2t0t04.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8-8x2ek8rdf5ylnanlioazhj7u1/3e0j8ecx2f3d2yp7.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8-8x2ek8rdf5ylnanlioazhj7u1/3g7rozt07i7tko29.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8-8x2ek8rdf5ylnanlioazhj7u1/3kppb4xoj80iz74w.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8-8x2ek8rdf5ylnanlioazhj7u1/3kwogxgibizjpehw.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8-8x2ek8rdf5ylnanlioazhj7u1/3mwyvqcq9zmdol6h.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8-8x2ek8rdf5ylnanlioazhj7u1/3nimcb9opljh611e.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8-8x2ek8rdf5ylnanlioazhj7u1/402heiimrilczt8m.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8-8x2ek8rdf5ylnanlioazhj7u1/42aorns85g81hv1e.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8-8x2ek8rdf5ylnanlioazhj7u1/46rd1mj4ci3ch9fu.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8-8x2ek8rdf5ylnanlioazhj7u1/49vdksrqamlsw067.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8-8x2ek8rdf5ylnanlioazhj7u1/4bd19pdqxs0vh8ge.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8-8x2ek8rdf5ylnanlioazhj7u1/4bjqatzcrqdjc31j.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8-8x2ek8rdf5ylnanlioazhj7u1/4iyb9hbh52xd0yb0.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8-8x2ek8rdf5ylnanlioazhj7u1/4qt41t1hm8admilg.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8-8x2ek8rdf5ylnanlioazhj7u1/4z45xhmw7qpln852.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8-8x2ek8rdf5ylnanlioazhj7u1/5gjs4hs305dk0vvj.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8-8x2ek8rdf5ylnanlioazhj7u1/74w8yd6vmpi6reo.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8-8x2ek8rdf5ylnanlioazhj7u1/7g1mwvgsmg678a9.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8-8x2ek8rdf5ylnanlioazhj7u1/bsje4n626fvsunr.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8-8x2ek8rdf5ylnanlioazhj7u1/cdtwmty3ade0l7g.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8-8x2ek8rdf5ylnanlioazhj7u1/dep-graph.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8-8x2ek8rdf5ylnanlioazhj7u1/query-cache.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8-8x2ek8rdf5ylnanlioazhj7u1/u672g2hsgd3af19.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8-8x2ek8rdf5ylnanlioazhj7u1/work-products.bin" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8-8x2ek8rdf5ylnanlioazhj7u1/yk9cjlbv2nekgxw.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8-8x2ek8rdf5ylnanlioazhj7u1/z5x0890tuk2x2wy.o" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/incremental/protof-2a4almfa169r3/s-gvx549ia7t-15hiee8.lock" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/protof.d" beforeDir="false" afterPath="$PROJECT_DIR$/target/debug/protof.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/protof.exe" beforeDir="false" afterPath="$PROJECT_DIR$/target/debug/protof.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/protof.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/target/debug/protof.pdb" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Rust File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -19,9 +86,12 @@
   <component name="MacroExpansionManager">
     <option name="directoryName" value="8vjvzu4a" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 0
-}]]></component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 0
+}</component>
   <component name="ProjectId" id="2g6AMI86JawZBRKLv0bCs2Q37Fv" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -29,16 +99,18 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Cargo.Run.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.rust.reset.selective.auto.import": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "main",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "org.rust.cargo.project.model.PROJECT_DISCOVERY": "true",
+    "org.rust.cargo.project.model.impl.CargoExternalSystemProjectAware.subscribe.first.balloon": "",
     "org.rust.first.attach.projects": "true",
     "vue.rearranger.settings.migration": "true"
   }
@@ -73,7 +145,9 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1715007603890</updated>
-      <workItem from="1715007605399" duration="3255000" />
+      <workItem from="1715007605399" duration="7525000" />
+      <workItem from="1715067058407" duration="14196000" />
+      <workItem from="1715089523015" duration="799000" />
     </task>
     <servers />
   </component>
