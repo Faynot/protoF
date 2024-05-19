@@ -101,3 +101,9 @@ fn main() {
 <p>1. Just download latest release</p>
 <p>2. Move file in "protof.exe" to some directory</p>
 <p>3. Place protof.exe in PATH</p>
+
+<h1>How to build?</h1>
+<pre><code>
+  cargo build
+</pre></code>
+<p>its all.</p>
