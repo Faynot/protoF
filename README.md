@@ -103,7 +103,5 @@ fn main() {
 <p>3. Place protof.exe in PATH</p>
 
 <h1>How to build?</h1>
-<pre><code>
-  cargo build
-</pre></code>
+<pre><code>cargo build</pre></code>
 <p>its all.</p>
