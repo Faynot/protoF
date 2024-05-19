@@ -96,3 +96,8 @@ fn main() {
 }
 
 </pre></code>
+
+<h1>How to use?</h1>
+<p>1. Just download latest release</p>
+<p>2. Move file in "protof.exe" to some directory</p>
+<p>3. Place protof.exe in PATH</p>
