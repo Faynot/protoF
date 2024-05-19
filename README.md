@@ -72,13 +72,13 @@
     let number = 5;
 
     if number < 0 {
-        println!("Число отрицательное");
+        println!("Nubmer is negative");
     } else if number == 0 {
-        println!("Число равно нулю");
+        println!("Number is zero");
     } else if number > 0 && number < 10 {
-        println!("Число положительное и меньше 10");
+        println!("Number is positive and less than 10");
     } else {
-        println!("Число положительное и больше или равно 10");
+        println!("Number is positive and greater than or equal to 10");
     }
 }
 </pre></code>
@@ -88,10 +88,10 @@ fn main() {
     let number = 5;
 
     match number {
-        n if n < 0 => println!("Число отрицательное"),
-        0 => println!("Число равно нулю"),
-        n if n > 0 && n < 10 => println!("Число положительное и меньше 10"),
-        _ => println!("Число положительное и больше или равно 10"),
+        n if n < 0 => println!("Nubmer is negative"),
+        0 => println!("Number is zero"),
+        n if n > 0 && n < 10 => println!("Number is positive and less than 10"),
+        _ => println!("Number is positive and greater than or equal to 10"),
     }
 }
   
