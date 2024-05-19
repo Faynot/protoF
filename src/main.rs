@@ -3,8 +3,28 @@ mod search;
 use std::env;
 use std::fs::{self, File};
 use std::io::{self, Write};
+use std::path::Path;
+use std::process::Command;
+use colored::Colorize;
+const ERROR_MSG: &str = "Error:";
 
 fn main() {
+
+
+    const WELCOME: &str = r#"
+
+        ╔══════════════════════════════════════════════════════════════════╗
+        ║                                                                  ║
+        ║                         welcome to PROTOF!                       ║
+        ║           version:                            0.0.2              ║
+        ║           author:                             faynot             ║
+        ║                                                                  ║
+        ║                                                  ©MIT License    ║
+        ║                                                                  ║
+        ╚══════════════════════════════════════════════════════════════════╝
+
+"#;
+    println!("{}", WELCOME.cyan().bold());
     const BASH: [&str; 8] = [
         "shutdown",
         "echo",
@@ -44,18 +64,48 @@ fn main() {
         "debug" => debug(&commands),
         "help" => help(),
         "new" => new(&args[2..], &mut commands, &BASH),
+        "clean" => {
+            if args.len() < 3 {
+                println!("Usage: {} clean <filename>", args[0]);
+            } else {
+                let filename = &args[2];
+                let (script_name, script_extension) = extract_script_info(filename);
+                let cleaning_file = vec![script_name, script_extension];
+                println!("Cleaning file set to: {:?}", cleaning_file);
+                run_clean_script(&cleaning_file);
+            }
+        },
         _ => {
-            println!("Unknown command: {}", command);
+            println!("{} Unknown command: {}", ERROR_MSG.bright_red(), command.bright_red());
             println!("Available commands: command1, command2");
         }
     }
+}
+
+fn extract_script_info(filename: &str) -> (String, String) {
+    let path = Path::new(filename);
+    let script_name = path.file_stem().and_then(|name| name.to_str()).unwrap_or("").to_string();
+    let script_extension = path.extension().and_then(|ext| ext.to_str()).unwrap_or("").to_string();
+    (script_name, script_extension)
+}
+
+fn run_clean_script(cleaning_file: &Vec<String>) {
+    let output = Command::new("node")
+        .arg("clean.js")
+        .arg(&cleaning_file[0])
+        .arg(&cleaning_file[1])
+        .output()
+        .expect("Failed to execute clean.js");
+
+    println!("{}", String::from_utf8_lossy(&output.stdout));
+    eprintln!("{}", String::from_utf8_lossy(&output.stderr));
 }
 
 fn delete_protocol(protocol_name: &str) {
     let appdata_dir = match dirs::data_local_dir() {
         Some(path) => path.join("protof"),
         None => {
-            eprintln!("Failed to get AppData directory");
+            eprintln!("{} Failed to get AppData directory", ERROR_MSG.bright_red());
             return;
         }
     };
@@ -66,17 +116,17 @@ fn delete_protocol(protocol_name: &str) {
     if script_path.exists() {
         match fs::remove_file(&script_path) {
             Ok(()) => println!("Protocol '{}' successfully deleted.", protocol_name),
-            Err(err) => eprintln!("Error deleting protocol '{}': {}", protocol_name, err),
+            Err(err) => eprintln!("{} deleting protocol '{}': {}", ERROR_MSG.bright_red(), protocol_name.bright_red(), err),
         }
     } else {
-        println!("Protocol '{}' not found.", protocol_name);
+        println!("{} Protocol '{}' not found.", ERROR_MSG.bright_red(), protocol_name);
     }
 }
 fn start_protocol(protocol_name: &str) {
     let appdata_dir = match dirs::data_local_dir() {
         Some(path) => path.join("protof"),
         None => {
-            eprintln!("Failed to get AppData directory");
+            eprintln!("{} Failed to get AppData directory", ERROR_MSG.bright_red());
             return;
         }
     };
@@ -92,7 +142,7 @@ fn start_protocol(protocol_name: &str) {
     if script_path.exists() {
         println!("Starting protocol: {}", protocol_name);
         // Используем powershell для запуска .sh файла
-        if let Err(err) = std::process::Command::new("powershell")
+        if let Err(err) = Command::new("powershell")
             .arg("-Command")
             .arg(&format!("& '{}'", script_path.to_string_lossy()))
             .status()
@@ -100,7 +150,7 @@ fn start_protocol(protocol_name: &str) {
             eprintln!("Failed to start protocol: {}", err);
         }
     } else {
-        println!("Protocol '{}' not found.", protocol_name);
+        println!("Protocol '{}' not found.", protocol_name.bright_red().bold());
     }
 }
 
@@ -167,7 +217,7 @@ fn new(args: &[String], commands: &mut Vec<String>, bash: &[&str; 8]) {
         ╚═════════════════════════════════════════════════════════════╝
     "#;
 
-    println!("{}", comms);
+    println!("{}", comms.bright_magenta());
     println!("Enter command numbers (type 'quit()' to exit):");
 
     loop {
@@ -261,17 +311,21 @@ fn new(args: &[String], commands: &mut Vec<String>, bash: &[&str; 8]) {
 
 fn help() {
     const HELP: &str = r#"
-    ╔══════════════════════════════════════════════════════════════════╗
-    ║                    List of commands - PROTOF                     ║
-    ║   help                      =             list of commands       ║
-    ║   new <name>                =             create a new protocol  ║
-    ║   delete <name>             =             remove a protocol      ║
-    ║   list                      =             list of protocols      ║
-    ║   password <name> <proto>   =             create/change password ║
-    ║                                           of protocol            ║
-    ╚══════════════════════════════════════════════════════════════════╝
+        ╔══════════════════════════════════════════════════════════════════╗
+        ║                    List of commands - PROTOF                     ║
+        ║   help                      =             list of commands       ║
+        ║   new <name>                =             create a new protocol  ║
+        ║   start <name>                            start a protocol       ║
+        ║   delete <name>             =             remove a protocol      ║
+        ║   list                      =             list of protocols      ║
+        ║   password <name> <proto>   =             create/change password ║
+        ║                                           of protocol            ║
+        ║                                                                  ║
+        ║   clean                     =             formate yout code      ║
+        ║                                           into prettier code     ║
+        ╚══════════════════════════════════════════════════════════════════╝
 "#;
-    println!("{}", HELP);
+    println!("{}", HELP.bright_cyan());
 }
 
 fn list_files() {
