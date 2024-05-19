@@ -7,22 +7,7 @@
     <cargoProject FILE="$PROJECT_DIR$/Cargo.toml" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d05ee489-7908-4537-b99b-5e0374ededb5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/build.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/clean.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/clean.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/.rustc_info.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/debug/deps/protof.exe" beforeDir="false" afterPath="$PROJECT_DIR$/target/debug/deps/protof.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/debug/deps/protof.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/target/debug/deps/protof.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/debug/protof.d" beforeDir="false" afterPath="$PROJECT_DIR$/target/debug/protof.d" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/debug/protof.exe" beforeDir="false" afterPath="$PROJECT_DIR$/target/debug/protof.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/debug/protof.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/target/debug/protof.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/test.js" afterDir="false" />
-    </list>
+    <list default="true" id="d05ee489-7908-4537-b99b-5e0374ededb5" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -117,7 +102,7 @@
       <workItem from="1715260371305" duration="234000" />
       <workItem from="1715962119561" duration="1328000" />
       <workItem from="1716030578772" duration="5000" />
-      <workItem from="1716111585285" duration="15313000" />
+      <workItem from="1716111585285" duration="15616000" />
     </task>
     <servers />
   </component>
