@@ -8,10 +8,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d05ee489-7908-4537-b99b-5e0374ededb5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/test/test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/test1.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test/test3.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build.rs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cargo.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cargo.toml" beforeDir="false" afterPath="$PROJECT_DIR$/Cargo.toml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/clean.js" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/clean.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.rs" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.rs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/.rustc_info.json" beforeDir="false" afterPath="$PROJECT_DIR$/target/.rustc_info.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/deps/protof.exe" beforeDir="false" afterPath="$PROJECT_DIR$/target/debug/deps/protof.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/deps/protof.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/target/debug/deps/protof.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/protof.d" beforeDir="false" afterPath="$PROJECT_DIR$/target/debug/protof.d" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/protof.exe" beforeDir="false" afterPath="$PROJECT_DIR$/target/debug/protof.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/debug/protof.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/target/debug/protof.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/test.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +59,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.rust.reset.selective.auto.import": "true",
     "git-widget-placeholder": "main",
+    "last_opened_file_path": "C:/Users/Happy PC/RustroverProjects/protof/target/debug",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -61,8 +72,12 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Happy PC\RustroverProjects\protof\target\debug" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Happy PC\RustroverProjects\protof" />
+      <recent name="C:\Users\Happy PC\RustroverProjects\protof\scripts" />
     </key>
   </component>
   <component name="RunManager">
@@ -102,11 +117,14 @@
       <workItem from="1715260371305" duration="234000" />
       <workItem from="1715962119561" duration="1328000" />
       <workItem from="1716030578772" duration="5000" />
-      <workItem from="1716111585285" duration="12367000" />
+      <workItem from="1716111585285" duration="15313000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="*.py" />
   </component>
 </project>

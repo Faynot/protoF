@@ -1,5 +1,6 @@
 mod search;
 
+
 use std::env;
 use std::fs::{self, File};
 use std::io::{self, Write};
@@ -8,9 +9,8 @@ use std::process::Command;
 use colored::Colorize;
 const ERROR_MSG: &str = "Error:";
 
+
 fn main() {
-
-
     const WELCOME: &str = r#"
 
         ╔══════════════════════════════════════════════════════════════════╗
@@ -90,8 +90,12 @@ fn extract_script_info(filename: &str) -> (String, String) {
 }
 
 fn run_clean_script(cleaning_file: &Vec<String>) {
+    let current_exe = env::current_exe().expect("Failed to get current executable path");
+    let exe_dir = current_exe.parent().expect("Failed to get parent directory of executable");
+    let clean_script_path = exe_dir.join("clean.js");
+
     let output = Command::new("node")
-        .arg("clean.js")
+        .arg(clean_script_path)
         .arg(&cleaning_file[0])
         .arg(&cleaning_file[1])
         .output()
@@ -271,7 +275,7 @@ fn new(args: &[String], commands: &mut Vec<String>, bash: &[&str; 8]) {
                         let command_line = format!("taskkill /IM {}.exe /F", program_name.trim());
                         writeln!(file, "{}", command_line).expect("Error writing to file");
                         commands.push(command_line);
-                    }
+                    },
                     "rm" => {
                         println!("Enter the name and extension of file to delete:");
                         let mut rm_name = String::new();
