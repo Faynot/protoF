@@ -83,7 +83,6 @@
 }
 </pre></code>
 <pre><code>
-
   // after
 fn main() {
     let number = 5;
