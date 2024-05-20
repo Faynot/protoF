@@ -1,3 +1,5 @@
+Twitch - faynot_
+YT - Faynot
 <div><img alt="Twitch Status" src="https://img.shields.io/twitch/status/faynot_">
 <img alt="YouTube Channel Subscribers" src="https://img.shields.io/youtube/channel/subscribers/UCAi7bnW3bOA0epKrKUA8IXw"></div>
 <div><img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/Faynot/protoF">
