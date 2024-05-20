@@ -1,3 +1,6 @@
+<img alt="Twitch Status" src="https://img.shields.io/twitch/status/faynot_">
+
+
 <h1>Wait, there will be documentation later...</h1>
 
 <p>for now look at the cat</p>
