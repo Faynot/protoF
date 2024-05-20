@@ -1,7 +1,8 @@
 <div><img alt="Twitch Status" src="https://img.shields.io/twitch/status/faynot_">
 <img alt="YouTube Channel Subscribers" src="https://img.shields.io/youtube/channel/subscribers/UCAi7bnW3bOA0epKrKUA8IXw"></div>
 <div><img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/Faynot/protoF">
-<img alt="GitHub License" src="https://img.shields.io/github/license/Faynot/protoF"></div>
+<img alt="GitHub License" src="https://img.shields.io/github/license/Faynot/protoF"><img alt="GitHub Downloads (all assets, all releases)" src="https://img.shields.io/github/downloads/Faynot/protoF/total">
+</div>
 
 
 <h1>Wait, there will be documentation later...</h1>
