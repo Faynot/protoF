@@ -192,6 +192,7 @@ fn debug() {
     println!("Debugging commands not implemented.");
 }
 
+
 fn new(args: &[String]) {
     if args.len() != 1 {
         eprintln!("Please enter this command as - protof new <name>");
@@ -242,8 +243,8 @@ fn new(args: &[String]) {
         ╠ 5                =                Delete some file          ╣
         ║                                   arg to 5 = <path>         ║
         ║                                                             ║
-        ╠ 6                =                Open some programm        ╣
-        ║                                   arg to 6 = <name > <path> ║
+        ╠ 6                =                Open some program         ╣
+        ║                                   arg to 6 = <name> <path>  ║
         ║                                                             ║
         ╠ 7                =                Close some program        ╣
         ║                                   arg to 7 = <name>.exe     ║
@@ -300,10 +301,19 @@ fn new(args: &[String]) {
                     println!("Enter program name: ");
                     let mut name = String::new();
                     io::stdin().read_line(&mut name).expect("Failed to read line");
-                    println!("Enter program path: ");
+                    println!("Enter program path (or type 'skip' to search): ");
                     let mut path = String::new();
                     io::stdin().read_line(&mut path).expect("Failed to read line");
-                    commands.push(format!("start \"{}\" \"{}\"", name.trim(), path.trim()));
+                    let path = path.trim();
+                    if path == "skip" {
+                        match search::find_exe(name.trim()) {
+                            Ok(Some(found_path)) => commands.push(format!("start \"{}\" \"{}\"", name.trim(), found_path)),
+                            Ok(None) => println!("Program not found"),
+                            Err(err) => eprintln!("Error: {}", err),
+                        }
+                    } else {
+                        commands.push(format!("start \"{}\" \"{}\"", name.trim(), path));
+                    }
                 }
                 7 => {
                     println!("Enter process name: ");
@@ -327,6 +337,8 @@ fn new(args: &[String]) {
 
     println!("Script saved to {}", file_path.display());
 }
+
+
 
 fn list_files() {
     let appdata_dir = match dirs::data_local_dir() {
