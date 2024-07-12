@@ -1,1 +1,3 @@
-const f1 = (a,b)=>{return a + b;};
+const f1 = (a, b) => {
+  return a + b;
+};

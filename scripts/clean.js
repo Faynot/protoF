@@ -63,8 +63,6 @@ const scriptName = process.argv[2];
 const scriptExtension = process.argv[3];
 let cleaningFile = scriptName + "." + scriptExtension;
 
-console.log(cleaningFile);
-
 try {
     formatFile(cleaningFile);
     console.log("Your code is now clean!");

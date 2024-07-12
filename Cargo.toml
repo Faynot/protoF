@@ -10,3 +10,9 @@ dirs = "5.0.1"
 indicatif = "0.16.2"
 colored = "2.0"
 cc = "1.0"
+ropey = "1.2.0"
+clap = "2.33.1"
+crossterm = "0.19.0"
+
+[profile.release]
+debug = true

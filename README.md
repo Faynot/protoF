@@ -1,3 +1,15 @@
+
+
+<img src="./protof.png"></img>
+<h1>Look</h1>
+<div><a href="https://www.twitch.tv/faynot_" ><img alt="Twitch Status" src="https://img.shields.io/twitch/status/faynot_"></a>
+  <br />
+<a href="https://www.youtube.com/@Faynot__" ><img alt="YouTube Channel Subscribers" src="https://img.shields.io/youtube/channel/subscribers/UCAi7bnW3bOA0epKrKUA8IXw"></a><br /></div><br /><br />
+<div><img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/Faynot/protoF"><br />
+<img alt="GitHub License" src="https://img.shields.io/github/license/Faynot/protoF"><a href="https://github.com/Faynot/protoF/releases"><img alt="GitHub Downloads (all assets, all releases)" src="https://img.shields.io/github/downloads/Faynot/protoF/total"></a>
+</div>
+
+
 <h1>Wait, there will be documentation later...</h1>
 
 <p>for now look at the cat</p>
@@ -96,3 +108,14 @@ fn main() {
 }
 
 </pre></code>
+
+<h1>How to use?</h1>
+<p>1. Just download latest release</p>
+<p>2. Move file in "protof.exe" to some directory</p>
+<p>3. Place protof.exe in PATH</p>
+
+<h1>How to build?</h1>
+<pre><code>cargo build</pre></code>
+<p>its all.</p>
+
+There are no releases on macos and linux yet, as it does not work well on unix-like operating systems
