@@ -10,10 +10,11 @@
 </div>
 
 
-<h1>Wait, there will be documentation later...</h1>
+<h1>Documentation</h1>
 
-<p>for now look at the cat</p>
-<img src="./balls.png"></img>
+<a href="https://glint.gitbook.io/protof">
+<img src="./frame.png"></img>
+</a>
 
 <h1>hello! hi! hello!</h1>
 <p>This is a universal console utility for developers! Here, at the time of version 0.2, you can create sh scripts, which in terms of functionality, in fact, can be called an interpreter, and there is also a command for formatting your code in a certain number of languages, using other utilities. I put everything in one pile, made it all convenient, and now you can use it in several commands</p>
