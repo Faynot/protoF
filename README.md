@@ -112,6 +112,12 @@ fn main() {
 
 </pre></code>
 
+<h1>Screenshots</h1>
+<img src="https://media.discordapp.net/attachments/1261280181977616458/1261280209924001894/Screenshot_19.png?ex=6692623b&is=669110bb&hm=b078ef4d7f896a04c729b2d7dbdf65f1f65ee9ac4ed13207186b0ab95a9a429c&=&format=webp&quality=lossless&width=692&height=484" />
+<img src="https://media.discordapp.net/attachments/1261280181977616458/1261280210171596810/Screenshot_20.png?ex=6692623b&is=669110bb&hm=dea9212948d95cb26c54c173b2b83534f2566466a1746d15f9c6ac8531fc53ae&=&format=webp&quality=lossless" />
+<img src="https://media.discordapp.net/attachments/1261280181977616458/1261280210414862417/Screenshot_18.png?ex=6692623b&is=669110bb&hm=65b3e157e0f3db7fba72913a865d49190d0866443268ac07ba21aa6b199c83af&=&format=webp&quality=lossless" />
+
+
 <h1>How to use?</h1>
 <p>1. Just download latest release</p>
 <p>2. Move file in "protof.exe" to some directory</p>
