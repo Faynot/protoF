@@ -79,39 +79,6 @@
 
 <p>Yes, I have combined several language formatters into one utility, and if they are not installed, they will be installed by you (this should be the case, but there are some bugs that I cannot fix at the moment)</p>
 
-<h1>An illustrative example of code formatting:</h1>
-<pre><code>
-
-// before
-fn main() {
-let number = 5;
-
-    if number < 0 {
-        println!("Nubmer is negative");
-    } else if number == 0 {
-        println!("Number is zero");
-    } else if number > 0 && number < 10 {
-        println!("Number is positive and less than 10");
-    } else {
-        println!("Number is positive and greater than or equal to 10");
-    }
-}
-</pre></code>
-<pre><code>
-  // after
-fn main() {
-    let number = 5;
-
-    match number {
-        n if n < 0 => println!("Nubmer is negative"),
-        0 => println!("Number is zero"),
-        n if n > 0 && n < 10 => println!("Number is positive and less than 10"),
-        _ => println!("Number is positive and greater than or equal to 10"),
-    }
-}
-
-</pre></code>
-
 <h1>Screenshots</h1>
 <img src="https://media.discordapp.net/attachments/1261280181977616458/1261280209924001894/Screenshot_19.png?ex=6692623b&is=669110bb&hm=b078ef4d7f896a04c729b2d7dbdf65f1f65ee9ac4ed13207186b0ab95a9a429c&=&format=webp&quality=lossless&width=692&height=484" />
 <img src="https://media.discordapp.net/attachments/1261280181977616458/1261280210171596810/Screenshot_20.png?ex=6692623b&is=669110bb&hm=dea9212948d95cb26c54c173b2b83534f2566466a1746d15f9c6ac8531fc53ae&=&format=webp&quality=lossless" />
