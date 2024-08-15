@@ -18,7 +18,7 @@ impl ScreenVector {
     pub fn _origin(&self) -> (usize, usize) {
         (self.t, self.b)
     }
-pub fn _right(&self) -> usize {
+    pub fn _right(&self) -> usize {
         self.t + self.max_w
     }
 
@@ -62,7 +62,9 @@ fn render_text(w: &mut Stdout, editor: &Editor) {
     let mut text = String::new();
 
     for (line_num, line) in editor.rope.lines_at(screen.t).enumerate() {
-        if line_num == screen.max_h {break;}
+        if line_num == screen.max_h {
+            break;
+        }
         text.push_str(&line.chars().collect::<String>())
     }
 
@@ -79,7 +81,11 @@ fn render_text(w: &mut Stdout, editor: &Editor) {
 
 fn render_command_bar(w: &mut Stdout, editor: &Editor) {
     // TODO: Compact this.
-    let dot = if Mode::Command == editor.mode { ":" } else { "" };
+    let dot = if Mode::Command == editor.mode {
+        ":"
+    } else {
+        ""
+    };
     let mut command = format!("{}{}", dot, editor.command.as_str());
     format_command_bar(&mut command, editor.screen.max_w);
     queue!(
@@ -92,7 +98,10 @@ fn render_command_bar(w: &mut Stdout, editor: &Editor) {
 }
 
 fn render_status_bar(w: &mut Stdout, editor: &Editor) {
-    let width = editor.screen.max_w.saturating_sub(editor.mode.to_string().len() + editor.cursor.to_string().len());
+    let width = editor
+        .screen
+        .max_w
+        .saturating_sub(editor.mode.to_string().len() + editor.cursor.to_string().len());
     let space = vec![' '; width].iter().collect::<String>();
     queue!(
         w,
@@ -103,13 +112,17 @@ fn render_status_bar(w: &mut Stdout, editor: &Editor) {
 }
 
 fn render_cursor(w: &mut Stdout, editor: &Editor) {
-    let x = if editor.mode == Mode::Command { editor.command.len().saturating_add(1) as u16 } else {editor.cursor.x};
-    let y = if editor.mode == Mode::Command { (1 + editor.screen.bottom()) as u16 } else {editor.cursor.y};
-    queue!(
-        w,
-        cursor::Show,
-        cursor::MoveTo(x, y),
-    ).expect("Error while rendering cursor");
+    let x = if editor.mode == Mode::Command {
+        editor.command.len().saturating_add(1) as u16
+    } else {
+        editor.cursor.x
+    };
+    let y = if editor.mode == Mode::Command {
+        (1 + editor.screen.bottom()) as u16
+    } else {
+        editor.cursor.y
+    };
+    queue!(w, cursor::Show, cursor::MoveTo(x, y),).expect("Error while rendering cursor");
 }
 
 fn render_error_message(w: &mut Stdout, editor: &Editor) {
@@ -119,17 +132,15 @@ fn render_error_message(w: &mut Stdout, editor: &Editor) {
         w,
         cursor::MoveTo(x, y),
         style::Print(style::style(&editor.error).on(style::Color::DarkRed)),
-    ).expect("Error while rendering cursor");
+    )
+    .expect("Error while rendering cursor");
 }
 
 fn render_output(w: &mut Stdout, editor: &Editor) {
     let x = 0;
     let y = (1 + editor.screen.bottom()) as u16;
-    queue!(
-        w,
-        cursor::MoveTo(x, y),
-        style::Print(&editor.output),
-    ).expect("Error while rendering cursor");
+    queue!(w, cursor::MoveTo(x, y), style::Print(&editor.output),)
+        .expect("Error while rendering cursor");
 }
 
 pub(crate) fn render(w: &mut Stdout, editor: &Editor) {
@@ -155,7 +166,9 @@ fn format_text(text: &mut String, width: usize, height: usize) {
         new.push_str(&line[..line.len().min(width)].replace("\t", "    "));
         new.push_str(&blanks);
         new.push_str("\r\n");
-        if y == height - 1 { break; }
+        if y == height - 1 {
+            break;
+        }
     }
     for _ in 0..(height.saturating_sub(new.count_char('\n'))) {
         new.push_str(&vec![filler; width].iter().collect::<String>());
@@ -179,9 +192,10 @@ impl StringCount for String {
     fn count_char(&self, chr: char) -> usize {
         let mut counter = 0;
         for c in self.chars() {
-            if c == chr { counter += 1; }
+            if c == chr {
+                counter += 1;
+            }
         }
         counter
     }
 }
-

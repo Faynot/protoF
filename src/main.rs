@@ -1,24 +1,24 @@
-mod search;
 pub mod commandline;
 pub mod editor;
+mod search;
+
+mod install;
 pub mod keymapper;
 pub mod render;
 pub mod util;
 
-use commandline::{argparser, from_path};
 use editor::{Editor, Mode};
 use keymapper::*;
 use render::*;
 use util::usub;
 
-use ropey::Rope;
+use colored::Colorize;
+use crossterm::event::{self};
 use std::env;
 use std::fs::{self, File};
-use std::io::{self, Write, Read, stdout, Stdout};
+use std::io::{self, stdout, Read, Write};
 use std::path::Path;
 use std::process::Command;
-use colored::Colorize;
-use crossterm::{event::{self}};
 use std::time::Duration;
 const ERROR_MSG: &str = "Error:";
 
@@ -44,6 +44,25 @@ fn main() {
     }
 
     let command = &args[1];
+
+    // Массив с допустимыми командами
+    let allowed_commands = [
+        "git",
+        "firefox",
+        "code",
+        "vim",
+        "gzip",
+        "unzip",
+        "fastfetch",
+    ];
+
+    // Проверяем, есть ли команда в массиве
+    if allowed_commands.contains(&command.as_str()) {
+        println!("installing {}...", command.bright_green());
+        install::install(command); // Передаем команду в функцию install()
+        return;
+    }
+
     match command.as_str() {
         "list" => list_files(),
         "start" => {
@@ -83,10 +102,14 @@ fn main() {
                 println!("Cleaning file set to: {:?}", cleaning_file);
                 run_clean_script(&cleaning_file);
             }
-        },
+        }
         _ => {
-            println!("{} Unknown command: {}", ERROR_MSG.bright_red(), command.bright_red());
-            println!("Available commands: list, start, delete, debug, help, new, clean, open");
+            println!(
+                "{} Unknown command: {}",
+                ERROR_MSG.bright_red(),
+                command.bright_red()
+            );
+            println!("Available commands: list, start, delete, debug, help, new, clean, open, a, b, c, d");
         }
     }
 }
@@ -114,14 +137,24 @@ fn vim(file_path: Option<String>) -> crossterm::Result<()> {
 
 fn extract_script_info(filename: &str) -> (String, String) {
     let path = Path::new(filename);
-    let script_name = path.file_stem().and_then(|name| name.to_str()).unwrap_or("").to_string();
-    let script_extension = path.extension().and_then(|ext| ext.to_str()).unwrap_or("").to_string();
+    let script_name = path
+        .file_stem()
+        .and_then(|name| name.to_str())
+        .unwrap_or("")
+        .to_string();
+    let script_extension = path
+        .extension()
+        .and_then(|ext| ext.to_str())
+        .unwrap_or("")
+        .to_string();
     (script_name, script_extension)
 }
 
 fn run_clean_script(cleaning_file: &Vec<String>) {
     let current_exe = env::current_exe().expect("Failed to get current executable path");
-    let exe_dir = current_exe.parent().expect("Failed to get parent directory of executable");
+    let exe_dir = current_exe
+        .parent()
+        .expect("Failed to get parent directory of executable");
     let clean_script_path = exe_dir.join("clean.js");
 
     let output = Command::new("node")
@@ -150,10 +183,19 @@ fn delete_protocol(protocol_name: &str) {
     if script_path.exists() {
         match fs::remove_file(&script_path) {
             Ok(()) => println!("Protocol '{}' successfully deleted.", protocol_name),
-            Err(err) => eprintln!("{} deleting protocol '{}': {}", ERROR_MSG.bright_red(), protocol_name.bright_red(), err),
+            Err(err) => eprintln!(
+                "{} deleting protocol '{}': {}",
+                ERROR_MSG.bright_red(),
+                protocol_name.bright_red(),
+                err
+            ),
         }
     } else {
-        println!("{} Protocol '{}' not found.", ERROR_MSG.bright_red(), protocol_name);
+        println!(
+            "{} Protocol '{}' not found.",
+            ERROR_MSG.bright_red(),
+            protocol_name
+        );
     }
 }
 
@@ -184,14 +226,16 @@ fn start_protocol(protocol_name: &str) {
             eprintln!("Failed to start protocol: {}", err);
         }
     } else {
-        println!("Protocol '{}' not found.", protocol_name.bright_red().bold());
+        println!(
+            "Protocol '{}' not found.",
+            protocol_name.bright_red().bold()
+        );
     }
 }
 
 fn debug() {
     println!("Debugging commands not implemented.");
 }
-
 
 fn new(args: &[String]) {
     if args.len() != 1 {
@@ -258,7 +302,9 @@ fn new(args: &[String]) {
 
     loop {
         let mut input = String::new();
-        io::stdin().read_line(&mut input).expect("Failed to read line");
+        io::stdin()
+            .read_line(&mut input)
+            .expect("Failed to read line");
 
         if input.trim() == "quit()" {
             break;
@@ -270,44 +316,62 @@ fn new(args: &[String]) {
                 1 => {
                     println!("Enter text to write: ");
                     let mut text = String::new();
-                    io::stdin().read_line(&mut text).expect("Failed to read line");
+                    io::stdin()
+                        .read_line(&mut text)
+                        .expect("Failed to read line");
                     commands.push(format!("echo {}", text.trim()));
                 }
                 2 => {
                     println!("Enter directory path: ");
                     let mut path = String::new();
-                    io::stdin().read_line(&mut path).expect("Failed to read line");
+                    io::stdin()
+                        .read_line(&mut path)
+                        .expect("Failed to read line");
                     commands.push(format!("mkdir {}", path.trim()));
                 }
                 3 => {
                     println!("Enter directory path: ");
                     let mut path = String::new();
-                    io::stdin().read_line(&mut path).expect("Failed to read line");
+                    io::stdin()
+                        .read_line(&mut path)
+                        .expect("Failed to read line");
                     commands.push(format!("rmdir {}", path.trim()));
                 }
                 4 => {
                     println!("Enter file path: ");
                     let mut path = String::new();
-                    io::stdin().read_line(&mut path).expect("Failed to read line");
+                    io::stdin()
+                        .read_line(&mut path)
+                        .expect("Failed to read line");
                     commands.push(format!("New-Item -ItemType File {}", path.trim()));
                 }
                 5 => {
                     println!("Enter file path: ");
                     let mut path = String::new();
-                    io::stdin().read_line(&mut path).expect("Failed to read line");
+                    io::stdin()
+                        .read_line(&mut path)
+                        .expect("Failed to read line");
                     commands.push(format!("rm {}", path.trim()));
                 }
                 6 => {
                     println!("Enter program name: ");
                     let mut name = String::new();
-                    io::stdin().read_line(&mut name).expect("Failed to read line");
+                    io::stdin()
+                        .read_line(&mut name)
+                        .expect("Failed to read line");
                     println!("Enter program path (or type 'skip' to search): ");
                     let mut path = String::new();
-                    io::stdin().read_line(&mut path).expect("Failed to read line");
+                    io::stdin()
+                        .read_line(&mut path)
+                        .expect("Failed to read line");
                     let path = path.trim();
                     if path == "skip" {
                         match search::find_exe(name.trim()) {
-                            Ok(Some(found_path)) => commands.push(format!("start \"{}\" \"{}\"", name.trim(), found_path)),
+                            Ok(Some(found_path)) => commands.push(format!(
+                                "start \"{}\" \"{}\"",
+                                name.trim(),
+                                found_path
+                            )),
                             Ok(None) => println!("Program not found"),
                             Err(err) => eprintln!("Error: {}", err),
                         }
@@ -318,7 +382,9 @@ fn new(args: &[String]) {
                 7 => {
                     println!("Enter process name: ");
                     let mut proc_name = String::new();
-                    io::stdin().read_line(&mut proc_name).expect("Failed to read line");
+                    io::stdin()
+                        .read_line(&mut proc_name)
+                        .expect("Failed to read line");
                     commands.push(format!("taskkill /IM {} /F", proc_name.trim()));
                 }
                 _ => println!("Invalid command number."),
@@ -337,8 +403,6 @@ fn new(args: &[String]) {
 
     println!("Script saved to {}", file_path.display());
 }
-
-
 
 fn list_files() {
     let appdata_dir = match dirs::data_local_dir() {

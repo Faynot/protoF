@@ -92,5 +92,3 @@ impl Display for EditorError {
         }
     }
 }
-
-
