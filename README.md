@@ -1,19 +1,17 @@
 
-
+<div><a href="https://www.twitch.tv/faynot_" ><img alt="Twitch Status" src="https://img.shields.io/twitch/status/faynot_"></a>
 <img src="./protof.png"></img>
 <h1>Look</h1>
-<div><a href="https://www.twitch.tv/faynot_" ><img alt="Twitch Status" src="https://img.shields.io/twitch/status/faynot_"></a>
+
   <br />
-<a href="https://www.youtube.com/@Faynot__" ><img alt="YouTube Channel Subscribers" src="https://img.shields.io/youtube/channel/subscribers/UCAi7bnW3bOA0epKrKUA8IXw"></a><br /></div><br /><br />
-<div><img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/Faynot/protoF"><br />
+<div><img alt="GitHub repo size" src="https://img.shields.io/github/repo-size/Faynot/protoF">
 <img alt="GitHub License" src="https://img.shields.io/github/license/Faynot/protoF"><a href="https://github.com/Faynot/protoF/releases"><img alt="GitHub Downloads (all assets, all releases)" src="https://img.shields.io/github/downloads/Faynot/protoF/total"></a>
 </div>
 
 
-<h1>Wait, there will be documentation later...</h1>
+<h1>Documentation</h1>
+<a href="https://glint.gitbook.io/protof" ><img src="./docs.png"></img><a>
 
-<p>for now look at the cat</p>
-<img src="./balls.png"></img>
 
 <h1>hello! hi! hello!</h1>
 <p>This is a universal console utility for developers! Here, at the time of version 0.2, you can create sh scripts, which in terms of functionality, in fact, can be called an interpreter, and there is also a command for formatting your code in a certain number of languages, using other utilities. I put everything in one pile, made it all convenient, and now you can use it in several commands</p>
