@@ -10,7 +10,7 @@
 
 
 <h1>Documentation</h1>
-<a href="https://glint.gitbook.io/protof" ><img src="./docs.png"></img><a>
+<a href="https://glint.gitbook.io/protof" ><img src="https://glint.gitbook.io/~gitbook/image?url=https%3A%2F%2F3037555305-files.gitbook.io%2F%7E%2Ffiles%2Fv0%2Fb%2Fgitbook-x-prod.appspot.com%2Fo%2Fspaces%252F0SLxuIGpIhEnJCMb6vgv%252Fuploads%252F87NTB6oDuF3lTlm69S6J%252F123.png%3Falt%3Dmedia%26token%3D863a84d8-c754-4954-97c1-fd4f66919f1d&width=768&dpr=1&quality=100&sign=63632c0&sv=1"></img><a>
 
 
 <h1>hello! hi! hello!</h1>
