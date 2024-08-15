@@ -74,39 +74,6 @@
 
 <p>Yes, I have combined several language formatters into one utility, and if they are not installed, they will be installed by you (this should be the case, but there are some bugs that I cannot fix at the moment)</p>
 
-<h1>An illustrative example of code formatting:</h1>
-<pre><code>
-
-// before
-fn main() {
-let number = 5;
-
-    if number < 0 {
-        println!("Nubmer is negative");
-    } else if number == 0 {
-        println!("Number is zero");
-    } else if number > 0 && number < 10 {
-        println!("Number is positive and less than 10");
-    } else {
-        println!("Number is positive and greater than or equal to 10");
-    }
-}
-</pre></code>
-<pre><code>
-  // after
-fn main() {
-    let number = 5;
-
-    match number {
-        n if n < 0 => println!("Nubmer is negative"),
-        0 => println!("Number is zero"),
-        n if n > 0 && n < 10 => println!("Number is positive and less than 10"),
-        _ => println!("Number is positive and greater than or equal to 10"),
-    }
-}
-
-</pre></code>
-
 <h1>How to use?</h1>
 <p>1. Just download latest release</p>
 <p>2. Move file in "protof.exe" to some directory</p>
